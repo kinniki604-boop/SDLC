@@ -1,0 +1,56 @@
+@startuml
+package "lazy_calculate" {
+    class Main {
+        + main(args: String[])
+        + start(stage: Stage)
+    }
+
+    class MainController {
+        - model: LazinessModel
+        - coeffLabel: Label
+        - levelLabel: Label
+        - phraseLabel: Label
+        + initModel(model: LazinessModel)
+        + onEnterDataClick()
+    }
+
+    class InputController {
+        - model: LazinessModel
+        - stage: Stage
+        - plannedField: TextField
+        - completedField: TextField
+        + initModel(model: LazinessModel, stage: Stage)
+        + onPlannedFieldEnter()
+        + onCalculateClick()
+    }
+
+    class LazinessModel {
+        - plannedTasks: IntegerProperty
+        - completedTasks: IntegerProperty
+        - lazinessCoefficient: DoubleProperty
+        - procrastinationLevel: StringProperty
+        - phrase: StringProperty
+        + updateData(planned: int, completed: int)
+        - calculate()
+        + lazinessCoefficientProperty(): DoubleProperty
+        + procrastinationLevelProperty(): StringProperty
+        + phraseProperty(): StringProperty
+    }
+
+    interface "ObservableValue\n(JavaFX Binding)" as Observable {
+        + addListener(...)
+        + bind(...)
+    }
+
+    Main ..> MainController : creates
+    Main ..> LazinessModel : creates
+
+    MainController --> LazinessModel : reads state
+    MainController ..> InputController : requests input
+
+    InputController --> LazinessModel : updates
+
+    LazinessModel o--> Observable : defines / notifies
+    MainController ..|> Observable : observes (via bind)
+}
+@enduml

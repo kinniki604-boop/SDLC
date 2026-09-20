@@ -1,0 +1,19 @@
+@startuml
+skinparam componentStyle rectangle
+
+package "LazinessCalculator System" {
+    component "LazinessModel\n(Active Model)" as Model
+    component "MainView\n(main-view.fxml)" as MView
+    component "InputView\n(input-view.fxml)" as IView
+
+    component "MainController" as MCtrl
+    component "InputController" as ICtrl
+
+    MView <--> MCtrl : connect
+    IView <--> ICtrl : connect
+
+    ICtrl --> Model : connect (update data)
+    MCtrl --> Model : connect (init/bind)
+    Model --> MView : connect (active notify)
+}
+@enduml
