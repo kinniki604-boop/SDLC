@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.StackPane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.effect.DropShadow?>
+
+<StackPane stylesheets="@styles/style.css" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.example.lazy_calculate.controllers.MainController">    <!-- Белая карточка по центру -->
+    <VBox alignment="CENTER" spacing="18.0" styleClass="card" maxWidth="420" maxHeight="280">
+        <!-- Тень карточки (исправлено y на offsetY) -->
+        <effect>
+            <DropShadow radius="15" spread="0.05" offsetY="8" color="#d1cce399"/>
+        </effect>
+
+        <Label text="Калькулятор Лени" styleClass="title-label"/>
+
+        <VBox alignment="CENTER" spacing="5.0">
+            <Label fx:id="coeffLabel" text="Коэффициент лени: --%" styleClass="result-label"/>
+            <Label fx:id="levelLabel" text="Уровень неизвестен" styleClass="level-label"/>
+        </VBox>
+
+        <Label fx:id="phraseLabel" text="Введите данные для анализа" wrapText="true" textAlignment="CENTER" styleClass="phrase-label"/>
+
+        <Button text="Ввести данные" onAction="#onEnterDataClick" styleClass="modern-button"/>
+    </VBox>
+</StackPane>
